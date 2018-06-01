@@ -26,11 +26,12 @@ clean-pyc:
 	find . -name '__pycache__' -exec rm -fr {} +
 
 fetch:
-	rm -rf project/app && git clone ssh://git@10.7.7.22:10022/sector3/passport.git project/app
+	rm -rf project/app
+	git clone ssh://git@10.7.7.22:10022/sector3/project.git project/app
 
 build:
-	docker build compose/python -t alpine:3.6-passport
-	docker build . -t django:passport
+	docker build compose/python -t alpine:3.6-project
+	docker build . -t django:project
 
 docs: 
 	cd project/app && mkdocs build && cd -
