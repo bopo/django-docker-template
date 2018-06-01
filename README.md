@@ -1,19 +1,16 @@
-Django容器项目部署程序
+Django 容器项目部署程序
 =================
 
-自动化部署Django项目(初始化)
+自动化部署 Django 项目
 ----------------------
 
 ### 1.编译运行镜像
 
 ```
 # 手动操作如下
-cd compose/django/
-docker build . -t alpine:3.6-passport
-cd -
+docker build . -t alpine:3.6-project
 
 # 自动操作
-make build
 make setup
 
 # 以上操作二选一即可
@@ -32,13 +29,13 @@ docker-compose run --rm django python3 manage.py collectstatic --no-input
 docker-compose run --rm django python3 manage.py createsuperuser
 ```
 
-### 3.运行Django容器
+### 3.运行 Django 容器
 
 ```
 docker-compose up -d
 ```
 
-备注： 以后重起服务使用下列命令行
+以后重起服务使用下列命令行
 ----------------------------
 
 ```
@@ -61,27 +58,26 @@ make destry - 销毁项目容器
 ```
 
 ### 客户端远程部署使用 fab 命令
+
 > 另外, `make help` 或者 `fab list` 查看命令行快捷工具帮助
 
 #### 首先修改 fabfile.py 的远程服务器 ssh 配置
+
 ```python
 env.roledefs = {
-    'dev': ['root@10.7.7.22'],
-    'pre': ['root@121.42.154.8'],
+    'dev': ['root@127.7.7.22'],
+    'pre': ['root@172.7.7.22'],
 }
 ```
 
 #### 更新代码, 同步到服务器, 重启容器
+
 ```bash
 fab -R dev pull sync migr rest
 ```
 
 #### 更新代码, 同步到服务器, 更新数据库, 重启容器
+
 ```bash
 fab -R pre pull sync migr rest
-```
-
-#### 更新文档
-```bash
-fab -R dev docs
 ```
