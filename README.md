@@ -1,7 +1,7 @@
-互兆容器项目部署程序
+Django容器项目部署程序
 =================
 
-自动化部署互兆项目(初始化)
+自动化部署Django项目(初始化)
 ----------------------
 
 ### 1.编译运行镜像
@@ -32,7 +32,7 @@ docker-compose run --rm django python3 manage.py collectstatic --no-input
 docker-compose run --rm django python3 manage.py createsuperuser
 ```
 
-### 3.运行互兆容器
+### 3.运行Django容器
 
 ```
 docker-compose up -d
