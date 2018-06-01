@@ -22,7 +22,7 @@ services:
     restart: always
     image: postgres:alpine
     volumes:
-      - ./project/dbs:/var/lib/postgresql:Z
+      - ./project/dbs/postgres:/var/lib/postgresql:Z
     env_file: ./project/etc/env.docker
 
   django:
@@ -43,4 +43,4 @@ services:
       - ./project/etc/env.docker:/app/.env:Z
       - ./project/etc/supervisor:/etc/supervisor:Z
     env_file: ./project/etc/env.docker
-    command: /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+    command: /supervisor.sh
